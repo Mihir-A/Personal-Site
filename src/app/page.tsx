@@ -1,13 +1,15 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 type Project = {
   title: string
   description: string
   githubUrl?: string
+  liveUrl?: string
   imageSrc?: string
   imageAlt?: string
+  tags: string[]
 }
 
 const projects: Project[] = [
@@ -15,18 +17,38 @@ const projects: Project[] = [
     title: 'Chess AI Engine',
     description:
       'A custom-built chess algorithm using minimax search and heuristics, consistently ranking in the top 1% of online engines.',
-    githubUrl: 'https://github.com/yourusername/chess-ai-engine',
+    githubUrl: 'https://github.com/Mihir-A/Chess-AI',
     imageSrc: '/chess-ai.png',
     imageAlt: 'Screenshot of the Chess AI interface',
+    tags: ['C++', 'SFML', 'Minimax', 'Heuristics'],
   },
   {
     title: 'Healthy Messages',
     description:
       'A TensorFlow model that detects harmful comments with 90% accuracy and integrates with Instagram and YouTube APIs.',
-    githubUrl: undefined,
-    imageSrc:
-      'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
-    imageAlt: 'Abstract visualization of social media messages',
+    githubUrl: 'https://github.com/Mihir-A/Healthy-Messages',
+    imageSrc: '/healthymessages.png',
+    imageAlt: 'Healthy Messages interface',
+    tags: ['TensorFlow', 'APIs', 'Python'],
+  },
+  {
+    title: 'Cadence',
+    description:
+      'An interview prep platform that delivers AI-generated feedback on technical accuracy, pauses, filler words, and confidence.',
+    githubUrl: 'https://github.com/Mihir-A/Cadence',
+    liveUrl: 'https://cadence.mihirdev.com',
+    imageSrc: '/cadence.png',
+    imageAlt: 'Code editor with highlighted syntax',
+    tags: ['Next.js', 'Tailwind CSS', 'Gemini', 'TwelveLabs'],
+  },
+  {
+    title: 'Doodle Guesser',
+    description:
+      'A fast-paced drawing game where a 93,387-parameter CNN guesses prompts in real time, achieving 95%+ accuracy across 11 classes and built for easy category expansion.',
+    githubUrl: 'https://github.com/Mihir-A/Doodle-Guesser',
+    imageSrc: '/doodleguesser.png',
+    imageAlt: 'Doodle Guesser game interface',
+    tags: ['CNN', 'TensorFlow', 'Python'],
   },
 ]
 
@@ -66,10 +88,12 @@ const skills = [
 ]
 
 export default function Home() {
+  const [theme, setTheme] = useState<'light' | 'dark' | null>(null)
+
   const socialLinks = useMemo(
     () => [
       {
-        href: 'https://github.com/yourusername',
+        href: 'https://github.com/Mihir-A',
         label: 'GitHub',
         icon: (
           <svg
@@ -87,7 +111,7 @@ export default function Home() {
         ),
       },
       {
-        href: 'https://www.linkedin.com/in/yourusername',
+        href: 'https://www.linkedin.com/in/mihirananthateeerta/',
         label: 'LinkedIn',
         icon: (
           <svg
@@ -101,7 +125,7 @@ export default function Home() {
         ),
       },
       {
-        href: 'https://www.instagram.com/yourusername',
+        href: 'https://www.instagram.com/mihir_.a/',
         label: 'Instagram',
         icon: (
           <svg
@@ -129,152 +153,301 @@ export default function Home() {
     [],
   )
 
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia?.(
+      '(prefers-color-scheme: dark)',
+    ).matches
+    const nextTheme =
+      storedTheme === 'light' || storedTheme === 'dark'
+        ? storedTheme
+        : prefersDark
+          ? 'dark'
+          : 'light'
+
+    setTheme(nextTheme)
+    document.documentElement.dataset.theme = nextTheme
+  }, [])
+
+  useEffect(() => {
+    if (!theme) {
+      return
+    }
+
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  const isDark = theme === 'dark'
+  const handleThemeToggle = () => {
+    setTheme((current) => (current === 'dark' ? 'light' : 'dark'))
+  }
+  const heroHeading = "Hi, I'm Mihir Ananthateerta"
+  const heroWords = heroHeading.split(' ')
+  const heroDescription =
+    'UCSB Computer Science Sophomore with experience in web development, embedded systems, and Machine Learning. Passionate about creating impactful tech solutions.'
+  const heroDescriptionDelay = heroWords.length * 90 + 180
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-100">
-      <header className="sticky top-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <main className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 opacity-60 [background-image:radial-gradient(var(--pattern-dot)_1px,transparent_1px)] [background-size:26px_26px]" />
+        <div className="absolute -top-32 right-0 h-72 w-72 rounded-full bg-[color:var(--accent-soft)]/50 blur-3xl motion-safe:animate-[floatSlow_12s_ease-in-out_infinite]" />
+        <div className="absolute top-1/3 -left-24 h-80 w-80 rounded-full bg-[color:var(--accent-soft)]/35 blur-3xl motion-safe:animate-[floatSlow_14s_ease-in-out_infinite]" />
+      </div>
+
+      <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[color:var(--surface)]/90 backdrop-blur">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
           <a
             href="#hero"
-            className="text-lg font-semibold tracking-wide text-pink-300 transition hover:text-pink-200"
+            className="text-base font-semibold text-[var(--text-strong)]"
           >
-            Mihir Ananthateerta
+            <span className="text-[var(--text-strong)]">Mihir</span>{" "}
+            <span className="text-[var(--accent)]">Ananthateerta</span>
           </a>
-          <div className="flex items-center gap-6 text-sm font-medium text-slate-300">
+          <div className="hidden items-center gap-6 text-sm font-medium text-[var(--text-muted)] md:flex">
             <a
-              href="#projects"
-              className="transition hover:text-pink-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-400"
+              href="#hero"
+              className="transition hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--accent)]"
             >
-              Projects
+              Home
             </a>
             <a
               href="#skills"
-              className="transition hover:text-pink-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-400"
+              className="transition hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--accent)]"
             >
               Skills
             </a>
             <a
+              href="#projects"
+              className="transition hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--accent)]"
+            >
+              Projects
+            </a>
+            <a
               href="#contact"
-              className="transition hover:text-pink-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-400"
+              className="transition hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--accent)]"
             >
               Contact
             </a>
-            <a
-              href="/resume.pdf"
-              className="rounded-full border border-pink-500 px-4 py-1.5 text-pink-200 transition hover:-translate-y-0.5 hover:bg-pink-500/10 hover:text-pink-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-400"
-            >
-              Resume
-            </a>
           </div>
+          <button
+            type="button"
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-pressed={isDark}
+            onClick={handleThemeToggle}
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition hover:border-[var(--accent-soft)] hover:text-[var(--accent)]"
+          >
+            {isDark ? (
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 3v2.25M6.22 6.22l1.59 1.59M3 12h2.25m.97 5.78l1.59-1.59M12 18.75V21m4.19-2.81l1.59 1.59M18.75 12H21m-1.81-5.78l-1.59 1.59M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"
+                />
+              </svg>
+            ) : (
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"
+                />
+              </svg>
+            )}
+          </button>
         </nav>
       </header>
 
-      <div className="mx-auto flex max-w-6xl flex-col gap-24 px-6 py-16">
+      <div className="mx-auto flex max-w-6xl flex-col gap-20 px-6 pb-24 pt-6">
         {/* Hero Section */}
-        <section
-          id="hero"
-          className="scroll-mt-32 flex flex-col-reverse gap-12 lg:flex-row lg:items-center"
-        >
-          <div className="order-1 mx-auto flex w-full max-w-sm flex-1 justify-center lg:order-2 lg:justify-end">
-            <div className="relative w-full max-w-sm">
-              <div className="absolute inset-0 translate-y-6 translate-x-6 rounded-[2.5rem] border-2 border-pink-600/70" />
-              <div className="relative rounded-[2.5rem] border-2 border-pink-500/80 bg-slate-900/70 p-3 shadow-2xl">
-                <div className="aspect-[3/4] w-full rounded-[2rem] bg-slate-800/80 backdrop-blur-sm" />
-                <p className="mt-4 text-center text-sm font-medium text-slate-400">
-                  Your photo could live here ✨
-                </p>
+        <section id="hero" className="scroll-mt-32 relative">
+          <div className="flex min-h-[calc(100vh-72px)] items-center">
+            <div className="mx-auto flex max-w-4xl -translate-y-6 flex-col items-center text-center">
+              <h1 className="mt-5 text-4xl font-semibold text-[var(--text-strong)] sm:text-5xl lg:text-6xl">
+                {heroWords.map((word, index) => {
+                  const accentWord = word === 'Mihir'
+
+                  return (
+                    <span
+                      key={`${word}-${index}`}
+                      className={`inline-block opacity-0 motion-reduce:opacity-100 motion-safe:animate-[fadeRight_0.6s_ease-out_forwards] ${accentWord ? 'text-[var(--accent)]' : ''} ${index === heroWords.length - 1 ? '' : 'mr-2'}`}
+                      style={{ animationDelay: `${index * 90}ms` }}
+                    >
+                      {word}
+                    </span>
+                  )
+                })}
+              </h1>
+              <p
+                className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--text-muted)] opacity-0 motion-reduce:opacity-100 motion-safe:animate-[fadeUp_0.8s_ease-out_forwards]"
+                style={{ animationDelay: `${heroDescriptionDelay}ms` }}
+              >
+                {heroDescription}
+              </p>
+              <div
+                className="mt-8 flex flex-wrap justify-center gap-4 opacity-0 motion-reduce:opacity-100 motion-safe:animate-[fadeUp_0.8s_ease-out_forwards]"
+                style={{ animationDelay: `${heroDescriptionDelay}ms` }}
+              >
+                <a
+                  href="#projects"
+                  className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-blue-500/30 transition hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
+                >
+                  View My Work
+                </a>
+                <a
+                  href="https://cdn.mihirdev.com/resume.pdf"
+                  className="inline-flex items-center justify-center rounded-full border border-[var(--accent-soft)] px-6 py-3 text-sm font-semibold text-[var(--accent)] transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[color:var(--accent-soft)]/25"
+                >
+                  Resume
+                </a>
               </div>
             </div>
           </div>
-
-          <div className="order-2 flex-1 text-center lg:order-1 lg:text-left">
-            <p className="text-sm uppercase tracking-[0.4em] text-pink-400">
-              Hello! I am
-            </p>
-            <h1 className="mt-4 text-5xl font-semibold sm:text-6xl">
-              Mihir Anantahteerta
-            </h1>
-            <h2 className="mt-3 text-xl font-semibold text-pink-400 sm:text-2xl">
-              Software Engineer • AI & Robotics Enthusiast
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-slate-300">
-              I’m a Computer Science student driven by a passion for intelligent
-              systems, teaching, and robotics. I build tools that help people
-              learn, create, and think in new ways.
-            </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start">
-              <a
-                href="/resume.pdf"
-                className="rounded-full border border-pink-500 px-6 py-3 font-medium text-pink-300 transition hover:-translate-y-0.5 hover:bg-pink-500/10 hover:text-pink-100"
+          <div className="absolute bottom-6 left-1/2 flex flex-col items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.4em] text-[var(--text-subtle)] motion-safe:animate-[scrollBounce_2.2s_ease-in-out_infinite]">
+            <span>Scroll</span>
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] text-[var(--accent)]">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
               >
-                Get my resume
-              </a>
-              <a
-                href="#projects"
-                className="rounded-full bg-pink-500 px-6 py-3 font-medium text-slate-900 transition hover:-translate-y-0.5 hover:bg-pink-400"
-              >
-                View Projects
-              </a>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 5v14m0 0l-5-5m5 5l5-5"
+                />
+              </svg>
+            </span>
           </div>
+
         </section>
 
         {/* Featured Projects */}
-        <section id="projects" className="scroll-mt-32 space-y-12">
-          <h2 className="text-center text-3xl font-semibold">
-            Featured Projects
-          </h2>
+        <section id="projects" className="scroll-mt-32">
+          <div className="mx-auto max-w-3xl text-center motion-safe:animate-[fadeUp_0.8s_ease-out_forwards] motion-safe:[animation-delay:80ms]">
+            <h2 className="text-3xl font-semibold text-[var(--text-strong)] sm:text-4xl">
+              Featured <span className="text-[var(--accent)]">Projects</span>
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)] sm:text-lg">
+              These projects reflect my approach to writing clean, maintainable
+              code and building user-friendly interfaces. I’ve focused on
+              practical solutions that balance performance, usability, and
+              reliability.
+            </p>
+          </div>
 
-          <div className="space-y-10">
+          <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {projects.map(
-              ({ title, description, githubUrl, imageSrc, imageAlt }) => {
+              (
+                {
+                  title,
+                  description,
+                  githubUrl,
+                  liveUrl,
+                  imageSrc,
+                  imageAlt,
+                  tags,
+                },
+                index,
+              ) => {
                 const hasImage = Boolean(imageSrc)
+                const primaryUrl = liveUrl
 
                 return (
                   <article
                     key={title}
-                    className="group flex flex-col gap-8 rounded-3xl border border-slate-800 bg-slate-900/70 p-6 shadow-lg transition hover:border-pink-500/60 hover:shadow-pink-500/10 lg:flex-row lg:items-stretch lg:p-8"
+                    className="group flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-[0_20px_50px_-35px_rgba(15,23,42,0.2)] transition hover:-translate-y-1 hover:shadow-[0_25px_60px_-35px_rgba(37,99,235,0.3)] motion-safe:animate-[fadeUp_0.7s_ease-out_forwards]"
+                    style={{ animationDelay: `${index * 120}ms` }}
                   >
-                    <div className="flex-1 max-w-md">
+                    <div className="relative aspect-[16/9] overflow-hidden bg-[var(--surface-muted)]">
                       {hasImage ? (
-                        <div className="aspect-square overflow-hidden rounded-2xl border border-pink-500/40 shadow-lg shadow-pink-500/20 transition group-hover:border-pink-400">
-                          <img
-                            src={imageSrc}
-                            alt={imageAlt ?? `${title} preview`}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
+                        <img
+                          src={imageSrc}
+                          alt={imageAlt ?? `${title} preview`}
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        />
                       ) : (
-                        <div className="flex aspect-square items-center justify-center rounded-2xl border border-dashed border-slate-700 bg-slate-900 text-sm font-medium text-slate-500">
+                        <div className="flex h-full items-center justify-center text-sm font-medium text-[var(--text-subtle)]">
                           Project visual coming soon
                         </div>
                       )}
                     </div>
 
-                    <div className="flex flex-1 flex-col justify-between gap-6 text-left lg:text-left">
-                      <div>
-                        <header className="flex flex-col gap-2">
-                          <h3 className="text-2xl font-semibold text-pink-300 group-hover:text-pink-200">
-                            {title}
-                          </h3>
-                          <span className="h-1 w-16 rounded-full bg-pink-500/60" />
-                        </header>
-                        <p className="mt-4 text-slate-300 leading-relaxed">
+                    <div className="flex flex-1 flex-col gap-4 px-6 py-6">
+                      <div className="flex flex-wrap gap-2">
+                        {tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-[var(--border)] bg-[var(--surface-muted)] px-3 py-1 text-xs font-semibold text-[var(--text-muted)]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="text-xl font-semibold text-[var(--text-strong)]">
+                          {title}
+                        </h3>
+                        <p className="text-sm leading-relaxed text-[var(--text-muted)]">
                           {description}
                         </p>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-4">
+                      <div className="mt-auto flex items-center justify-between">
+                        {primaryUrl ? (
+                          <a
+                            href={primaryUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-500/30 transition hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
+                          >
+                            Live Link
+                            <svg
+                              aria-hidden="true"
+                              viewBox="0 0 20 20"
+                              className="h-4 w-4"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M5.5 4.75a.75.75 0 01.75-.75h7.69l-2.72-2.72a.75.75 0 111.06-1.06l4 4c.3.3.3.77 0 1.06l-4 4a.75.75 0 11-1.06-1.06l2.72-2.72H6.25a.75.75 0 01-.75-.75z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        ) : null}
+
                         {githubUrl ? (
                           <a
                             href={githubUrl}
+                            aria-label={`${title} GitHub`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full border border-pink-500 px-5 py-2 text-sm font-medium text-pink-200 transition hover:-translate-y-0.5 hover:bg-pink-500/10 hover:text-pink-100"
+                            className="text-[var(--text-muted)] transition hover:text-[var(--text-strong)]"
                           >
                             <svg
                               aria-hidden="true"
                               viewBox="0 0 24 24"
-                              className="h-5 w-5"
+                              className="h-6 w-6"
                               fill="currentColor"
                             >
                               <path
@@ -283,13 +456,8 @@ export default function Home() {
                                 clipRule="evenodd"
                               />
                             </svg>
-                            View Code
                           </a>
-                        ) : (
-                          <span className="inline-flex items-center rounded-full border border-dashed border-slate-700 px-5 py-2 text-sm text-slate-400">
-                            Repo coming soon
-                          </span>
-                        )}
+                        ) : null}
                       </div>
                     </div>
                   </article>
@@ -300,24 +468,30 @@ export default function Home() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="scroll-mt-32 space-y-10">
-          <div className="text-center">
-            <h2 className="text-3xl font-semibold">Skills</h2>
-            <p className="mt-3 text-slate-300">
+        <section id="skills" className="scroll-mt-32">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-semibold text-[var(--text-strong)]">
+              Skills
+            </h2>
+            <p className="mt-3 text-[var(--text-muted)]">
               A snapshot of tools and technologies I work with.
             </p>
           </div>
 
-          <div className="space-y-8">
-            {skills.map(({ category, items }) => (
-              <article key={category} className="space-y-4">
-                <h3 className="text-xl font-semibold text-pink-300">
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {skills.map(({ category, items }, index) => (
+              <article
+                key={category}
+                className="space-y-4 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[0_18px_40px_-35px_rgba(15,23,42,0.35)] motion-safe:animate-[fadeUp_0.7s_ease-out_forwards]"
+                style={{ animationDelay: `${index * 120}ms` }}
+              >
+                <h3 className="text-lg font-semibold text-[var(--text-strong)]">
                   {category}
                 </h3>
                 <ul className="flex flex-wrap gap-3">
                   {items.map((item) => (
                     <li key={item}>
-                      <span className="inline-flex items-center rounded-xl border border-pink-600/40 bg-slate-900/70 px-4 py-2 text-sm font-medium text-pink-200 shadow-sm shadow-pink-500/10 transition hover:border-pink-400 hover:text-pink-100">
+                      <span className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface-muted)] px-4 py-2 text-xs font-semibold text-[var(--text-muted)] transition hover:border-[var(--accent-soft)] hover:text-[var(--accent)]">
                         {item}
                       </span>
                     </li>
@@ -329,32 +503,36 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="scroll-mt-32 text-center">
-          <h2 className="text-3xl font-semibold">Get in Touch</h2>
-          <p className="mt-4 text-slate-300">
-            I’m always open to collaboration or new opportunities. Let’s
-            connect!
-          </p>
-          <a
-            href="mailto:youremail@example.com"
-            className="mt-6 inline-block rounded-full bg-pink-500 px-6 py-3 font-medium text-slate-900 transition hover:-translate-y-0.5 hover:bg-pink-400"
-          >
-            Contact Me
-          </a>
+        <section id="contact" className="scroll-mt-32">
+          <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] px-6 py-12 text-center shadow-[0_20px_50px_-40px_rgba(15,23,42,0.3)] motion-safe:animate-[fadeUp_0.8s_ease-out_forwards] motion-safe:[animation-delay:120ms] sm:px-10">
+            <h2 className="text-3xl font-semibold text-[var(--text-strong)]">
+              Get in Touch
+            </h2>
+            <p className="mt-4 text-[var(--text-muted)]">
+              I’m always open to collaboration or new opportunities. Let’s
+              connect!
+            </p>
+            <a
+              href="mailto:mihiranan@gmail.com"
+              className="mt-6 inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-blue-500/30 transition hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
+            >
+              Contact Me
+            </a>
 
-          <div className="mt-8 flex justify-center gap-6 text-slate-300">
-            {socialLinks.map(({ href, label, icon }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition hover:text-pink-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-400"
-              >
-                {icon}
-              </a>
-            ))}
+            <div className="mt-8 flex justify-center gap-6 text-[var(--text-muted)]">
+              {socialLinks.map(({ href, label, icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--accent)]"
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
           </div>
         </section>
       </div>

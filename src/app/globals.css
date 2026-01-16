@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #020617;
-  --foreground: #e2e8f0;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-muted: #f1f5f9;
+  --border: #e2e8f0;
+  --text-strong: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #94a3b8;
+  --accent: #2563eb;
+  --accent-hover: #3b82f6;
+  --accent-soft: #bfdbfe;
+  --pattern-dot: rgba(15, 23, 42, 0.08);
+  color-scheme: light;
 }
 
 @theme inline {
@@ -12,21 +23,90 @@
   --font-mono: var(--font-geist-mono);
 }
 
+[data-theme="dark"] {
+  --background: #0b1120;
+  --foreground: #e2e8f0;
+  --surface: #0f172a;
+  --surface-muted: #111827;
+  --border: #1f2937;
+  --text-strong: #f8fafc;
+  --text-muted: #cbd5f5;
+  --text-subtle: #94a3b8;
+  --accent: #60a5fa;
+  --accent-hover: #3b82f6;
+  --accent-soft: #1e3a8a;
+  --pattern-dot: rgba(148, 163, 184, 0.16);
+  color-scheme: dark;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --background: #0b1120;
+    --foreground: #e2e8f0;
+    --surface: #0f172a;
+    --surface-muted: #111827;
+    --border: #1f2937;
+    --text-strong: #f8fafc;
+    --text-muted: #cbd5f5;
+    --text-subtle: #94a3b8;
+    --accent: #60a5fa;
+    --accent-hover: #3b82f6;
+    --accent-soft: #1e3a8a;
+    --pattern-dot: rgba(148, 163, 184, 0.16);
+    color-scheme: dark;
   }
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), "Segoe UI", sans-serif;
   min-height: 100vh;
 }
 
 html {
   background-color: var(--background);
   scroll-behavior: smooth;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scrollBounce {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
 }
