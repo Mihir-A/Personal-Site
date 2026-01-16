@@ -413,29 +413,6 @@ export default function Home() {
                       </div>
 
                       <div className="mt-auto flex items-center justify-between">
-                        {primaryUrl ? (
-                          <a
-                            href={primaryUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-500/30 transition hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
-                          >
-                            Live Link
-                            <svg
-                              aria-hidden="true"
-                              viewBox="0 0 20 20"
-                              className="h-4 w-4"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M5.5 4.75a.75.75 0 01.75-.75h7.69l-2.72-2.72a.75.75 0 111.06-1.06l4 4c.3.3.3.77 0 1.06l-4 4a.75.75 0 11-1.06-1.06l2.72-2.72H6.25a.75.75 0 01-.75-.75z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </a>
-                        ) : null}
-
                         {githubUrl ? (
                           <a
                             href={githubUrl}
@@ -453,6 +430,29 @@ export default function Home() {
                               <path
                                 fillRule="evenodd"
                                 d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.36 1.08 2.94.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.02a9.56 9.56 0 015 0c1.9-1.29 2.74-1.02 2.74-1.02.55 1.41.2 2.45.1 2.71.64.7 1.02 1.59 1.02 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48A10 10 0 0012 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        ) : null}
+
+                        {primaryUrl ? (
+                          <a
+                            href={primaryUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-500/30 transition hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
+                          >
+                            Live Link
+                            <svg
+                              aria-hidden="true"
+                              viewBox="0 0 20 20"
+                              className="h-4 w-4"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M5.5 4.75a.75.75 0 01.75-.75h7.69l-2.72-2.72a.75.75 0 111.06-1.06l4 4c.3.3.3.77 0 1.06l-4 4a.75.75 0 11-1.06-1.06l2.72-2.72H6.25a.75.75 0 01-.75-.75z"
                                 clipRule="evenodd"
                               />
                             </svg>
