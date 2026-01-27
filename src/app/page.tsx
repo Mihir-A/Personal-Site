@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import Image from 'next/image'
 
 type Project = {
   title: string
@@ -185,7 +186,7 @@ export default function Home() {
   const heroHeading = "Hi, I'm Mihir Ananthateerta"
   const heroWords = heroHeading.split(' ')
   const heroDescription =
-    'UCSB Computer Science Sophomore with experience in web development, embedded systems, and Machine Learning. Passionate about creating impactful tech solutions.'
+    'UCSB Computer Science Junior with experience in web development, embedded systems, and Machine Learning. Passionate about creating impactful tech solutions.'
   const heroDescriptionDelay = heroWords.length * 90 + 180
 
   return (
@@ -245,12 +246,13 @@ export default function Home() {
                 className="h-5 w-5"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="1.5"
+                strokeWidth="1.75"
               >
+                <circle cx="12" cy="12" r="4" />
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M12 3v2.25M6.22 6.22l1.59 1.59M3 12h2.25m.97 5.78l1.59-1.59M12 18.75V21m4.19-2.81l1.59 1.59M18.75 12H21m-1.81-5.78l-1.59 1.59M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"
+                  d="M12 3.5v2.25M12 18.25v2.25M3.5 12h2.25M18.25 12h2.25M5.7 5.7l1.6 1.6M16.7 16.7l1.6 1.6M18.3 5.7l-1.6 1.6M7.3 16.7l-1.6 1.6"
                 />
               </svg>
             ) : (
@@ -381,10 +383,12 @@ export default function Home() {
                   >
                     <div className="relative aspect-[16/9] overflow-hidden bg-[var(--surface-muted)]">
                       {hasImage ? (
-                        <img
+                        <Image
                           src={imageSrc}
                           alt={imageAlt ?? `${title} preview`}
-                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                          fill
+                          sizes="(min-width: 1024px) 32rem, (min-width: 768px) 50vw, 100vw"
+                          className="object-cover transition duration-500 group-hover:scale-105"
                         />
                       ) : (
                         <div className="flex h-full items-center justify-center text-sm font-medium text-[var(--text-subtle)]">
@@ -443,19 +447,21 @@ export default function Home() {
                             href={primaryUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-500/30 transition hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
+                            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold leading-none text-white shadow-sm shadow-blue-500/30 transition hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
                           >
                             Live Link
                             <svg
                               aria-hidden="true"
-                              viewBox="0 0 20 20"
-                              className="h-4 w-4"
-                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              className="h-4 w-4 shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.25"
                             >
                               <path
-                                fillRule="evenodd"
-                                d="M5.5 4.75a.75.75 0 01.75-.75h7.69l-2.72-2.72a.75.75 0 111.06-1.06l4 4c.3.3.3.77 0 1.06l-4 4a.75.75 0 11-1.06-1.06l2.72-2.72H6.25a.75.75 0 01-.75-.75z"
-                                clipRule="evenodd"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M5 12h14m-7-7 7 7-7 7"
                               />
                             </svg>
                           </a>
