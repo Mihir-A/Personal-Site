@@ -279,12 +279,14 @@ export default function Home() {
           <div className="flex min-h-[calc(100vh-72px)] items-center">
             <div className="mx-auto flex max-w-4xl -translate-y-6 flex-col items-center text-center">
               <h1 className="mt-5 text-4xl font-semibold text-[var(--text-strong)] sm:text-5xl lg:text-6xl">
+                <span className="sr-only">{heroHeading}</span>
                 {heroWords.map((word, index) => {
                   const accentWord = word === 'Mihir'
 
                   return (
                     <span
                       key={`${word}-${index}`}
+                      aria-hidden="true"
                       className={`inline-block opacity-0 motion-reduce:opacity-100 motion-safe:animate-[fadeRight_0.6s_ease-out_forwards] ${accentWord ? 'text-[var(--accent)]' : ''} ${index === heroWords.length - 1 ? '' : 'mr-2'}`}
                       style={{ animationDelay: `${index * 90}ms` }}
                     >
