@@ -372,7 +372,6 @@ export default function Home() {
                 },
                 index,
               ) => {
-                const hasImage = Boolean(imageSrc)
                 const primaryUrl = liveUrl
 
                 return (
@@ -382,7 +381,7 @@ export default function Home() {
                     style={{ animationDelay: `${index * 120}ms` }}
                   >
                     <div className="relative aspect-[16/9] overflow-hidden bg-[var(--surface-muted)]">
-                      {hasImage ? (
+                      {imageSrc ? (
                         <Image
                           src={imageSrc}
                           alt={imageAlt ?? `${title} preview`}
