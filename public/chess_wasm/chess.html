@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chess</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: transparent;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      #canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
+    <script>
+      (function () {
+        var canvas = document.getElementById('canvas');
+        var assetBase = '/chess_wasm/';
+
+        function resize() {
+          var dpr = window.devicePixelRatio || 1;
+          var width = document.documentElement.clientWidth;
+          var height = document.documentElement.clientHeight;
+
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          canvas.width = Math.floor(width * dpr);
+          canvas.height = Math.floor(height * dpr);
+
+          if (typeof Module !== 'undefined' && typeof Module.setCanvasSize === 'function') {
+            Module.setCanvasSize(canvas.width, canvas.height);
+          }
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('click', function () {
+          canvas.focus();
+        });
+
+        window.Module = {
+          canvas: canvas,
+          locateFile: function (path) {
+            return assetBase + path;
+          },
+          onRuntimeInitialized: function () {
+            resize();
+            setTimeout(function () {
+              canvas.focus();
+            }, 0);
+          },
+        };
+
+        resize();
+      })();
+    </script>
+    <script async src="/chess_wasm/chess.js"></script>
+  </body>
+</html>

@@ -19,9 +19,10 @@ const projects: Project[] = [
     description:
       'A custom-built chess algorithm using minimax search and heuristics, consistently ranking in the top 1% of online engines.',
     githubUrl: 'https://github.com/Mihir-A/Chess-AI',
+    liveUrl: '/chess',
     imageSrc: '/chess-ai.png',
     imageAlt: 'Screenshot of the Chess AI interface',
-    tags: ['C++', 'SFML', 'Minimax', 'Heuristics'],
+    tags: ['C++', 'SDL2', 'Minimax', 'Heuristics'],
   },
   {
     title: 'Healthy Messages',
@@ -84,6 +85,7 @@ const skills = [
       'Matplotlib',
       'Pygame',
       'SFML',
+      'SDL2',
     ],
   },
 ]

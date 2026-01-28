@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chess</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: transparent;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      #canvas {
+        display: block;
+        background: #000;
+        transform-origin: center;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
+    <script>
+      (function () {
+        var canvas = document.getElementById('canvas');
+        var baseSize = 800;
+        var baseLocked = false;
+        var attempts = 0;
+
+        function prefillBase() {
+          if (baseLocked) {
+            return;
+          }
+
+          if (
+            canvas.width === 0 ||
+            canvas.height === 0 ||
+            (canvas.width === 300 && canvas.height === 150)
+          ) {
+            canvas.width = baseSize;
+            canvas.height = baseSize;
+          }
+        }
+
+        function detectBase() {
+          if (canvas.width > 0 && canvas.height > 0) {
+            if (!(canvas.width === 300 && canvas.height === 150)) {
+              baseSize = Math.min(canvas.width, canvas.height);
+              baseLocked = true;
+              return true;
+            }
+          }
+
+          return false;
+        }
+
+        function fit() {
+          prefillBase();
+          detectBase();
+
+          var width = document.documentElement.clientWidth;
+          var height = document.documentElement.clientHeight;
+          var scale = Math.min(width / baseSize, height / baseSize);
+
+          canvas.style.width = baseSize + 'px';
+          canvas.style.height = baseSize + 'px';
+          canvas.style.transform = 'scale(' + scale + ')';
+        }
+
+        function stabilize() {
+          if (detectBase()) {
+            fit();
+            return;
+          }
+
+          if (attempts < 30) {
+            attempts += 1;
+            requestAnimationFrame(stabilize);
+          } else {
+            fit();
+          }
+        }
+
+        function scheduleFit() {
+          requestAnimationFrame(fit);
+        }
+
+        window.addEventListener('resize', scheduleFit);
+        window.addEventListener('click', function () {
+          canvas.focus();
+        });
+
+        window.Module = {
+          canvas: canvas,
+          onRuntimeInitialized: function () {
+            stabilize();
+            setTimeout(fit, 60);
+            setTimeout(function () {
+              canvas.focus();
+            }, 0);
+          },
+        };
+
+        fit();
+      })();
+    </script>
+    <script async src="chess.js"></script>
+  </body>
+</html>
