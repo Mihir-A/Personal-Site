@@ -188,7 +188,7 @@ export default function Home() {
   const heroHeading = "Hi, I'm Mihir Ananthateerta"
   const heroWords = heroHeading.split(' ')
   const heroDescription =
-    'UCSB Computer Science Junior with experience in web development, embedded systems, and Machine Learning. Passionate about creating impactful tech solutions.'
+    'UCSB Computer Science Student with experience in web development, embedded systems, and Machine Learning. Passionate about creating impactful tech solutions.'
   const heroDescriptionDelay = heroWords.length * 90 + 180
 
   return (
