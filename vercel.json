@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "chess.mihirdev.com"
+        }
+      ],
+      "destination": "https://mihirdev.com/chess",
+      "permanent": true
+    }
+  ]
+}
