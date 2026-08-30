@@ -44,6 +44,15 @@ const projects: Project[] = [
     tags: ['Next.js', 'Tailwind CSS', 'Gemini', 'TwelveLabs'],
   },
   {
+    title: 'Unscroll',
+    description:
+      'Use Instagram on iOS without an infinite Reels feed. Unscroll patches a user-supplied IPA to hide suggested Reels and stop endless scrolling.',
+    githubUrl: 'https://github.com/Mihir-A/Unscroll',
+    imageSrc: '/unscroll-infinity.svg',
+    imageAlt: 'Unscroll crossed-out infinity icon',
+    tags: ['iOS', 'Objective-C', 'Python', 'Sideloading'],
+  },
+  {
     title: 'Doodle Guesser',
     description:
       'A fast-paced drawing game where a 93,387-parameter CNN guesses prompts in real time, achieving 95%+ accuracy across 11 classes and built for easy category expansion.',

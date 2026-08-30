@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">Unscroll</title>
+  <desc id="description">A crossed-out infinity symbol inside a rounded square</desc>
+  <defs>
+    <linearGradient id="background" x1="120" y1="50" x2="1060" y2="650" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#312E81"/>
+      <stop offset="0.48" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#DB2777"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="510" y1="440" x2="700" y2="235" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="0.52" stop-color="#C084FC"/>
+      <stop offset="1" stop-color="#FB7185"/>
+    </linearGradient>
+    <filter id="shadow" x="310" y="75" width="580" height="580" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="26" stdDeviation="28" flood-color="#111827" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow" x="300" y="40" width="600" height="600" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="70"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#background)"/>
+  <circle cx="260" cy="120" r="180" fill="#60A5FA" opacity="0.22" filter="url(#glow)"/>
+  <circle cx="990" cy="555" r="210" fill="#FB7185" opacity="0.24" filter="url(#glow)"/>
+  <path d="M0 540C210 430 385 625 610 530C815 443 975 470 1200 585V675H0Z" fill="#0F172A" opacity="0.12"/>
+
+  <g filter="url(#shadow)">
+    <rect x="378" y="116" width="444" height="444" rx="116" fill="#0F172A"/>
+    <rect x="389" y="127" width="422" height="422" rx="106" fill="none" stroke="white" stroke-opacity="0.14" stroke-width="2"/>
+  </g>
+
+  <path
+    d="M470 338C505 264 554 264 600 338C646 412 695 412 730 338C695 264 646 264 600 338C554 412 505 412 470 338Z"
+    fill="none"
+    stroke="white"
+    stroke-width="34"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path d="M516 433L684 242" stroke="#0F172A" stroke-width="66" stroke-linecap="round"/>
+  <path d="M516 433L684 242" stroke="url(#mark)" stroke-width="38" stroke-linecap="round"/>
+</svg>
