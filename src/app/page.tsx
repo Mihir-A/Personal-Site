@@ -19,7 +19,7 @@ const projects: Project[] = [
   {
     title: 'Chess AI Engine',
     description:
-      'A C++ chess engine with legal move validation, minimax search, and alpha-beta pruning. Achieved a consistent 1800+ Elo rating.',
+      'A C++ chess engine with legal move validation, minimax search, and alpha-beta pruning. Consistently rated 1800+ Elo, placing it in the top 5% of online players.',
     githubUrl: 'https://github.com/Mihir-A/Chess-AI',
     liveUrl: '/chess',
     liveLabel: 'Play Chess',
@@ -71,9 +71,9 @@ const experience = [
     location: 'San Francisco, CA · Hybrid',
     current: true,
     highlights: [
-      'Developed Python APIs on AWS for document ingestion and retrieval in Cloudwick’s Amorphic platform.',
-      'Implemented RAG pipelines with chunking, embeddings, and vector search to answer questions about documents.',
-      'Built agent workflows that query document collections, invoke backend tools, and return answers with sources.',
+      'Develop Python APIs on AWS for document ingestion and retrieval in Cloudwick’s Amorphic platform.',
+      'Implement RAG pipelines with chunking, embeddings, and vector search to answer questions about documents.',
+      'Build agent workflows that query document collections, invoke backend tools, and return answers with sources.',
     ],
     tags: ['Python', 'AWS', 'RAG', 'Vector Search'],
   },

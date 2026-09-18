@@ -226,6 +226,17 @@ button:focus-visible {
 
 .hero-section {
   isolation: isolate;
+  display: grid;
+  align-items: center;
+  /* Account for the two-row mobile header and the content's top padding. */
+  min-height: calc(100svh - 6.875rem - 1.5rem);
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    /* The desktop header occupies a single row. */
+    min-height: calc(100svh - 3.5625rem - 1.5rem);
+  }
 }
 
 .hero-atmosphere {
@@ -274,14 +285,16 @@ button:focus-visible {
 
 .skills-list {
   margin-top: 2rem;
-  border-top: 1px solid var(--border);
 }
 
 .skills-row {
   display: grid;
   gap: 0.5rem;
   padding: 1rem 0;
-  border-bottom: 1px solid var(--border);
+}
+
+.skills-row + .skills-row {
+  border-top: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
 }
 
 .skills-items {
@@ -358,73 +371,91 @@ button:focus-visible {
   }
 }
 
+.contact-panel {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 0 0 1rem;
+  text-align: center;
+}
+
+.contact-heading {
+  color: var(--text-strong);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+}
+
+.contact-details {
+  min-width: 0;
+  position: relative;
+}
+
 .contact-email {
-  display: inline-flex;
-  flex-wrap: wrap;
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 2rem;
-  max-width: 100%;
-  padding: 0.5rem 0.5rem 0.5rem 1.25rem;
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  background: var(--background);
+  gap: 0.25rem;
+  position: relative;
 }
 
 .contact-email-link {
-  color: var(--text-strong);
-  font-size: clamp(0.875rem, 2.5vw, 1.125rem);
-  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
   overflow-wrap: anywhere;
-  text-underline-offset: 4px;
+  text-decoration: none;
+  text-decoration-color: var(--border);
+  text-underline-offset: 0.4em;
+  text-decoration-thickness: 1px;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
 }
 
 .contact-email-link:hover {
-  text-decoration: underline;
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 
 .copy-email-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-width: 6rem;
-  min-height: 2.75rem;
-  padding: 0.625rem 0.875rem;
-  border: 1px solid var(--border);
-  border-radius: 0.625rem;
-  background: var(--surface);
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  background: transparent;
   color: var(--text-muted);
-  font-size: 0.875rem;
-  font-weight: 500;
   cursor: pointer;
-  transition: color 180ms ease, border-color 180ms ease;
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
 }
 
 .copy-email-button:hover {
   color: var(--accent);
   border-color: var(--accent);
+  background: var(--surface);
 }
 
-.copy-email-button svg {
-  width: 1rem;
-  height: 1rem;
-}
+.copy-email-button svg { width: 1rem; height: 1rem; }
 
-.copy-status {
-  min-height: 1.25rem;
-  margin-top: 0.625rem;
+.copy-status:not(.sr-only) {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 0.5rem;
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--accent);
 }
 
 .contact-socials {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1.5rem;
-  margin-top: 1.25rem;
+  margin-top: 0.25rem;
 }
 
 .contact-socials a {
@@ -433,17 +464,14 @@ button:focus-visible {
   gap: 0.5rem;
   min-height: 2.75rem;
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   transition: color 180ms ease;
 }
 
 .contact-socials a:hover { color: var(--accent); }
-.contact-socials svg { width: 1.125rem; height: 1.125rem; }
-
-@media (max-width: 479px) {
-  .contact-email { padding: 0.875rem; }
-}
+.contact-socials svg { width: 1rem; height: 1rem; }
+.contact-socials a > span { color: var(--text-subtle); }
 
 .action-button {
   transition: transform 250ms var(--motion-ease), background-color 200ms ease, border-color 200ms ease, box-shadow 250ms ease;

@@ -24,25 +24,21 @@ export function ContactSection() {
 
   return (
     <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-32">
-      <div data-reveal className="contact-panel rounded-3xl border border-[var(--border)] bg-[var(--surface)] px-6 py-12 text-center shadow-[0_20px_50px_-40px_rgba(15,23,42,0.3)] sm:px-10">
-        <p className="section-eyebrow">Get in touch</p>
-        <h2 id="contact-heading" className="text-3xl font-semibold text-[var(--text-strong)]">
-          Let’s build something useful.
+      <div data-reveal className="contact-panel">
+        <h2 id="contact-heading" className="contact-heading">
+          Get in touch
         </h2>
-        <p className="mx-auto mt-4 max-w-xl leading-relaxed text-[var(--text-muted)]">
-          Have a software engineering opportunity or a project in mind? Let’s talk.
-        </p>
 
+        <div className="contact-details">
         <div className="contact-email">
           <a href={`mailto:${email}`} className="contact-email-link">{email}</a>
-          <button type="button" onClick={copyEmail} className="copy-email-button" aria-label="Copy email address">
+          <button type="button" onClick={copyEmail} className="copy-email-button" aria-label="Copy email address" title={copyState === 'copied' ? 'Copied!' : 'Copy email address'}>
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
               {copyState === 'copied' ? <path d="m5 12 4 4L19 6" /> : <><rect x="8" y="8" width="12" height="12" rx="2" /><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3" /></>}
             </svg>
-            {copyState === 'copied' ? 'Copied!' : 'Copy'}
           </button>
         </div>
-        <p role="status" aria-live="polite" className="copy-status">
+        <p role="status" aria-live="polite" className={`copy-status${copyState === 'idle' ? ' sr-only' : ''}`}>
           {copyState === 'copied' ? 'Email address copied.' : copyState === 'error' ? 'Couldn’t copy. Select the email address to copy it manually.' : '\u00a0'}
         </p>
 
@@ -55,6 +51,7 @@ export function ContactSection() {
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.78v1.71h.05c.53-.98 1.8-2.02 3.7-2.02 3.96 0 4.7 2.6 4.7 5.99V21H17v-5.92c0-1.41-.03-3.23-2.07-3.23-2.07 0-2.39 1.53-2.39 3.11V21H9z" /></svg>
             LinkedIn <span aria-hidden="true">↗</span>
           </a>
+        </div>
         </div>
       </div>
     </section>
