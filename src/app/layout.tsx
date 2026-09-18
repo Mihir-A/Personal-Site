@@ -4,6 +4,8 @@ import "./globals.css";
 
 const DEFAULT_SITE_URL = "https://mihirdev.com";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL;
+const siteDescription =
+  "UC San Diego Computer Science student seeking SWE internships. Experience in AI solutions at Cloudwick, ASIC verification at Upscale AI, and full-stack and embedded development.";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,11 +20,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Mihir Ananthateerta — Portfolio",
+    default: "Mihir Ananthateerta — Software Engineering Portfolio",
     template: "%s | Mihir Ananthateerta",
   },
-  description:
-    "UCSB Computer Science sophomore building web apps, embedded systems, and machine learning projects.",
+  description: siteDescription,
   applicationName: "Mihir's Portfolio",
   authors: [{ name: "Mihir Ananthateerta", url: siteUrl }],
   creator: "Mihir Ananthateerta",
@@ -32,7 +33,9 @@ export const metadata: Metadata = {
     "Mihir",
     "mihirdev",
     "portfolio",
-    "UCSB",
+    "UC San Diego",
+    "UCSD",
+    "software engineering internships",
     "computer science",
     "web development",
     "embedded systems",
@@ -45,17 +48,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    title: "Mihir Ananthateerta — Portfolio",
-    description:
-      "UCSB Computer Science sophomore building web apps, embedded systems, and machine learning projects.",
+    title: "Mihir Ananthateerta — Software Engineering Portfolio",
+    description: siteDescription,
     siteName: "Mihir's Portfolio",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mihir Ananthateerta — Portfolio",
-    description:
-      "UCSB Computer Science sophomore building web apps, embedded systems, and machine learning projects.",
+    title: "Mihir Ananthateerta — Software Engineering Portfolio",
+    description: siteDescription,
   },
   robots: {
     index: true,
