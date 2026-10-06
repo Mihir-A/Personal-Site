@@ -267,7 +267,7 @@ export default function Home() {
           <div className="flex items-center py-16 sm:py-24 lg:py-28">
             <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
               <p className="hero-eyebrow text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)] sm:text-sm">
-                UC San Diego CS · Class of 2028
+                UC San Diego CS
               </p>
               <h1 className="mt-5 text-3xl font-semibold tracking-tight text-[var(--text-strong)] sm:text-5xl lg:text-6xl">
                 <span className="sr-only">{heroHeading}</span>
