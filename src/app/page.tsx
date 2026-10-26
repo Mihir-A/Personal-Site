@@ -64,6 +64,16 @@ const projects: Project[] = [
 
 const experience = [
   {
+    company: 'Capital One',
+    role: 'Software Engineering Intern',
+    focus: 'Incoming',
+    dates: 'Summer 2027',
+    location: 'Chicago, IL',
+    current: false,
+    highlights: ['Incoming Summer 2027'],
+    tags: [],
+  },
+  {
     company: 'Cloudwick',
     role: 'Software Engineering Intern',
     focus: 'AI Solutions',
@@ -335,14 +345,14 @@ export default function Home() {
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent)]">{job.focus}</p>
                     <h4 className="mt-2 text-xl font-semibold text-[var(--text-strong)]">{job.role}</h4>
-                    <ul className="experience-highlights">
+                    {job.highlights.length > 0 && <ul className="experience-highlights">
                       {job.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-                    </ul>
-                    <ul aria-label="Technologies and focus areas" className="mt-5 flex flex-wrap gap-2">
+                    </ul>}
+                    {job.tags.length > 0 && <ul aria-label="Technologies and focus areas" className="mt-5 flex flex-wrap gap-2">
                       {job.tags.map((tag) => (
                         <li key={tag} className="rounded-full border border-[var(--border)] bg-[var(--surface-muted)] px-3 py-1 text-xs font-medium text-[var(--text-muted)]">{tag}</li>
                       ))}
-                    </ul>
+                    </ul>}
                   </div>
                 </article>
               </li>
