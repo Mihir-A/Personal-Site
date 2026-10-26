@@ -311,7 +311,7 @@ export default function Home() {
                   View Experience <ArrowIcon />
                 </a>
                 <a
-                  href="/resume.pdf"
+                  href="https://cdn.mihirdev.com/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="action-button inline-flex items-center justify-center gap-2 rounded-full border border-[var(--accent-soft)] px-6 py-3 text-sm font-semibold text-[var(--accent)] transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[color:var(--accent-soft)]/25"
